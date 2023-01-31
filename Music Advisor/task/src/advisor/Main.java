@@ -6,6 +6,7 @@ public class Main {
         final Scanner scan = new Scanner(System.in);
         String input = "";
         boolean go = true;
+        boolean authorization = false;
         String[] featuredPlaylists = new String[] {"Mellow Morning", "Wake Up and Smell the Coffee",
                                                     "Monday Motivation", "Songs to Sing in the Shower"};
         String[] newAlbums = new String[] {"Mountains [Sia, Diplo, Labrinth",
@@ -18,36 +19,61 @@ public class Main {
                                                 "Arab Mood Booster",
                                                  "Sunday Stroll"};
 
+        String clientId = "a15be1aafac14bd6b5d0433c486d02a7";
+
         while (go) {
             input = scan.nextLine();
             switch (input) {
+                case "auth":
+                    authorization = true;
+                    StringBuilder link = new StringBuilder("https://accounts.spotify.com/authorize?client_id=");
+                    link.append(clientId);
+                    link.append("&redirect_uri=http://localhost:8080&response_type=code\n---SUCCESS---\n");
+                    System.out.print(link.toString());
+                    break;
                 case "featured":
-                    StringBuilder featured = new StringBuilder("---FEATURED---\n");
-                    for (String featuredPlaylist : featuredPlaylists) {
-                        featured.append(featuredPlaylist).append("\n");
+                    if (!authorization) {
+                        System.out.println("Please, provide access for application.");
+                    } else {
+                        StringBuilder featured = new StringBuilder("---FEATURED---\n");
+                        for (String featuredPlaylist : featuredPlaylists) {
+                            featured.append(featuredPlaylist).append("\n");
+                        }
+                        System.out.print(featured.toString());
                     }
-                    System.out.print(featured.toString());
                     break;
                 case "new":
-                    StringBuilder newReleases = new StringBuilder("---NEW RELEASES---\n");
-                    for (String newAlbum : newAlbums) {
-                        newReleases.append(newAlbum).append("\n");
+                    if (!authorization) {
+                        System.out.println("Please, provide access for application.");
+                    } else {
+                        StringBuilder newReleases = new StringBuilder("---NEW RELEASES---\n");
+                        for (String newAlbum : newAlbums) {
+                            newReleases.append(newAlbum).append("\n");
+                        }
+                        System.out.print(newReleases.toString());
                     }
-                    System.out.print(newReleases.toString());
                     break;
                 case "categories":
-                    StringBuilder categoryList = new StringBuilder("---CATEGORIES---\n");
-                    for (String category : categories) {
-                        categoryList.append(category).append("\n");
+                    if (!authorization) {
+                        System.out.println("Please, provide access for application.");
+                    } else {
+                        StringBuilder categoryList = new StringBuilder("---CATEGORIES---\n");
+                        for (String category : categories) {
+                            categoryList.append(category).append("\n");
+                        }
+                        System.out.print(categoryList.toString());
                     }
-                    System.out.print(categoryList.toString());
                     break;
                 case "playlists Mood":
-                    StringBuilder moodList = new StringBuilder("---MOOD PLAYLISTS---\n");
-                    for (String mood : moodPlaylists) {
-                        moodList.append(mood).append("\n");
+                    if (!authorization) {
+                        System.out.println("Please, provide access for application.");
+                    } else {
+                        StringBuilder moodList = new StringBuilder("---MOOD PLAYLISTS---\n");
+                        for (String mood : moodPlaylists) {
+                            moodList.append(mood).append("\n");
+                        }
+                        System.out.print(moodList.toString());
                     }
-                    System.out.print(moodList.toString());
                     break;
                 case "exit":
                     System.out.println("---GOODBYE!---");
